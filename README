@@ -1,0 +1,20 @@
+The MS Outlook contact importer is a great addition to any social network. Our contact importer is unqiue in every aspect compared to anything available in the market today. Following is the list of features:
+
+    Full support of MS Outlooks 2003/2007
+    Tested and fully compatible with XP, XP SP2/3, Vista, 7 with IE 6, 7 and 8
+    Full support of internationalizion and unicode
+    Full support for MS Exchange
+    Unique NK2(Autocomplete) contact importing feature which supports both ordinary and MS Exchange based Outlook clients
+    Resolving contacts that have LDAP addresses to e-mails if there is any e-mails available in Active Directory cache.
+    Support for MS Sitelock for additional security
+    Rigorously tested on all the mentioned platforms
+    Developed on VS 2008 SP1 VC++
+    There is no dependency for the DLLs and all libraries required are hard linked
+    Extensive debuging capability and log files that can be used to track any possible errors
+    Fully multi-threaded that doesn't lock or crash browser even if you imports thousands of contacts
+    Build in innovative paging and indexing and sorting capability to import a group of contacts based on specific filters
+    Duplicate contact removal capabilty based on e-mail
+    Fully Javascript/JSON compatible 
+    Full error reporting to Javascript invoking class
+    Highly optimised and fast with only 400kb CAB file
+
