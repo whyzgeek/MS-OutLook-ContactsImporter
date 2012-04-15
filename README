@@ -17,4 +17,16 @@ The MS Outlook contact importer is a great addition to any social network. Our c
     Fully Javascript/JSON compatible 
     Full error reporting to Javascript invoking class
     Highly optimised and fast with only 400kb CAB file
+	
 
+Quick Start:
+
+
+
+On a PC which has MS Outlook 2000 or higher, open ./rmcax/default.htm in IE browser. 
+Confirm security prompt to install ActiveX(the sample ActiveX is signed by a development cert so you might need to tweak your IE secuity options to get it installed).
+You should see contacts are populated on screen.
+
+To Develop/Customize use VS 2008 VC++.
+
+Enjoy!
