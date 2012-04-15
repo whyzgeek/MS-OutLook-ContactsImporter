@@ -1,0 +1,666 @@
+<html>
+<head>
+<title>(c)ThomsonReuters Contact Finder Control</title>
+
+<link type="text/css" href="themes/grid.css" rel="stylesheet" media="screen" />
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="json.js"></script>
+
+<style type="text/css">
+		table {
+			text-align: left;
+			font-size: 12px;
+			font-family: verdana;
+			background: #c0c0c0;
+		}
+ 
+		table thead  {
+			cursor: pointer;
+		}
+ 
+		table thead tr,
+		table tfoot tr {
+			background: #c0c0c0;
+		}
+ 
+		table tbody tr {
+			background: #f0f0f0;
+		}
+ 
+		td, th {
+			border: 1px solid white;
+		}
+	</style>
+
+<script type="text/javascript">
+
+    var trContactFinder = null;
+    var trContactFinderInit = false;
+    var startTimePABSearch;
+    var endTimePABSearch;
+    var startTimeNK2Search;
+    var endTimePABSearch;
+    var PABCounter = 0;
+    var NK2Counter = 0;
+    var fhAddPABContacts;
+    var fhAddNK2Contacts;
+    var PABContacts;
+    var NK2Contacts;
+
+     
+    function formLoad() {
+        trContactFinder = document.getElementById("TRContactFinder");
+        if (trContactFinder == null||trContactFinder.object == null) {            
+            return;
+        }
+
+        if (trContactFinder.InitCtrl() > 0) {
+
+            trContactFinderInit = true;
+            trContactFinder.SubFolderLevel = document.getElementById("lstSubFolderLevel").value            
+        }
+    }
+
+    function getPABFolderCount() {        
+        if (trContactFinderInit) {           
+            document.getElementById("btnPABFolderCount").disabled = "disabled";
+            document.getElementById("btnAbortPABFolderCount").disabled = "";    
+            trContactFinder.StartPABFolderCounting();
+        }
+    }
+    function abortPABFolderCounting() {
+        if (trContactFinderInit) {          
+            trContactFinder.AbortPABFolderCounting();
+        }
+    }
+    function getPABContactCount() {
+        if (trContactFinderInit) {
+            document.getElementById("btnPABContactCount").disabled = "disabled";
+            document.getElementById("btnAbortPABContactCount").disabled = "";
+            trContactFinder.StartPABContactCounting();
+        }
+
+    }
+    function abortPABContactCounting() {
+        if (trContactFinderInit) {           
+            trContactFinder.AbortPABContactCounting();
+        }
+    }
+    function getNK2ContactCount() {
+        if (trContactFinderInit) {
+            document.getElementById("btnNK2ContactCount").disabled = "disabled";
+            document.getElementById("btnAbortNK2ContactCount").disabled = "";
+            trContactFinder.StartNK2ContactCounting();
+        }
+    }
+    function abortNK2ContactCounting() {
+        if (trContactFinderInit) {
+            trContactFinder.AbortNK2ContactCounting();
+        }
+    }
+    function getPABContacts() {        
+            if (trContactFinder.object == null)
+                return;
+
+            var table = document.getElementById("grdPAB");
+            var rowCount = table.rows.length;
+            for (var i = 1; i < rowCount; i++)
+                table.deleteRow(1);
+
+            if (trContactFinder == null)
+                return;
+
+            trContactFinder.FetchUnique = document.getElementById("chkUnique1").checked == true ? 1 : 0;
+            var pageSize = document.getElementById("txtPageSize1").value;
+            if (pageSize == null || pageSize == "") pageSize = 0;
+
+            pageSize = parseInt(pageSize);
+            if (isNaN(pageSize)) {
+                alert("Invalid page size. Page size can be in range 1-1000");
+                return false;
+            }
+
+            if (pageSize > 1000) {
+                alert("Invalid page size. Page size can be in range 1-1000");
+                return false;
+            }
+
+            var pageNo = document.getElementById("txtPageNo1").value;
+            if (pageNo == null || pageNo == "") pageNo = 0;
+
+            pageNo = parseInt(pageNo);
+            if (isNaN(pageNo)) {
+                alert("Invalid page #. Page # can be in range 1-100");
+                return false;
+            }
+
+            if (pageNo > 100) {
+                alert("Invalid page #. Page # can be in range 1-100");
+                return false;
+            }
+
+            trContactFinder.PABPageSize = pageSize;
+
+            var searchBy = document.getElementById("selSerachBy1").options[document.getElementById("selSerachBy1").selectedIndex].value;
+
+            var startWith = document.getElementById("txtStartWith1").value;
+
+            document.getElementById("btnSearch1").disabled = "disabled";
+            document.getElementById("btnAbort1").disabled = "";
+
+            startTimePABSearch = new Date().getTime();
+            trContactFinder.StartPABContactSearch(searchBy, startWith, pageNo);        
+    }
+
+    function getNK2Contacts() {        
+            if (trContactFinder.object == null)
+                return;
+
+            var table = document.getElementById("grdNK2");
+            var rowCount = table.rows.length;
+            for (var i = 1; i < rowCount; i++)
+                table.deleteRow(1);
+
+            if (trContactFinder == null)
+                return;
+            trContactFinder.FetchUnique = document.getElementById("chkUnique2").checked == true ? 1 : 0;
+
+            var searchBy = document.getElementById("selSerachBy1").options[document.getElementById("selSerachBy2").selectedIndex].value;
+
+            var startWith = document.getElementById("txtStartWith2").value;
+
+            var pageSize = document.getElementById("txtPageSize2").value;
+
+            if (pageSize == null || pageSize == "") pageSize = 0;
+
+            pageSize = parseInt(pageSize);
+            if (isNaN(pageSize)) {
+                alert("Invalid page size. Page size can be in range 1-1000");
+                return false;
+            }
+
+
+            if (pageSize > 1000) {
+                alert("Invalid page size. Page size can be in range 1-1000");
+                return false;
+            }
+
+            var pageNo = document.getElementById("txtPageNo2").value;
+            if (pageNo == null || pageNo == "") pageNo = 0;
+
+            pageNo = parseInt(pageNo);
+            if (isNaN(pageNo)) {
+                alert("Invalid page #. Page # can be in range 1-100");
+                return false;
+            }
+
+            if (pageNo > 100) {
+                alert("Invalid page #. Page # can be in range 1-100");
+                return false;
+            }
+
+            trContactFinder.NK2PageSize = pageSize;
+            document.getElementById("btnSearch2").disabled = "disabled";
+            document.getElementById("btnAbort2").disabled = "";
+            startTimeNK2Search = new Date().getTime();
+            trContactFinder.StartNK2ContactSearch(searchBy, startWith, pageNo);     
+    }
+    function abortPABSearch() {
+        if (trContactFinderInit) {           
+            trContactFinder.AbortPABSearch();
+        }      
+    }
+    function abortNK2Search() {
+        if (trContactFinderInit) {           
+            trContactFinder.AbortNK2Search();
+        }
+    }
+
+    function addPABContacts() {
+        var tBody = document.getElementById("grdPAB").getElementsByTagName("TBODY")[0];
+        if (PABCounter < PABContacts.length) {
+            var contact = PABContacts[PABCounter];
+            addContact(tBody, contact, PABCounter + 1);
+            PABCounter++;
+            fhAddPABContacts = setTimeout("addPABContacts()", 1);
+        }
+        else {
+            clearTimeout(fhAddPABContacts);
+            var endTimeFillGrid = new Date().getTime();
+            document.getElementById("grdTime1").value = (endTimeFillGrid - endTimePABSearch) / 1000;
+        }
+    }
+
+    function addNK2Contacts() {
+        var tBody = document.getElementById("grdNK2").getElementsByTagName("TBODY")[0];
+        if (NK2Counter < NK2Contacts.length) {
+            var contact = NK2Contacts[NK2Counter];
+            addContact(tBody, contact, NK2Counter + 1);
+            NK2Counter++;
+            fhAddNK2Contacts = setTimeout("addNK2Contacts()", 1);
+        }
+        else {
+            clearTimeout(fhAddNK2Contacts);
+            var endTimeFillGrid = new Date().getTime();
+            document.getElementById("grdTime2").value = (endTimeFillGrid - endTimeNK2Search) / 1000;        
+        }
+    }
+      
+    function addContact(tBody, contact,index) {
+        var row = document.createElement("tr");
+
+        var cell = document.createElement("td");
+        cell.innerHTML = contact.id;
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.innerHTML = contact.folder + "&nbsp;";
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.innerHTML = contact.firstName + "&nbsp;";
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.innerHTML = contact.middleName + "&nbsp;";
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.innerHTML = contact.lastName + "&nbsp;";
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.innerHTML = contact.fullName + "&nbsp;";
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cell.innerHTML = contact.company + "&nbsp;";
+        row.appendChild(cell);
+        
+        cell = document.createElement("td");
+        cell.innerHTML = contact.emails[0];
+        
+        if (cell.innerHTML != "" && contact.emails[1] != "")
+            cell.innerHTML = cell.innerHTML + "<br>" + contact.emails[1];
+        else if (cell.innerHTML == "" && contact.emails[1] != "")
+            cell.innerHTML = contact.emails[1];
+            
+        if (cell.innerHTML != "" && contact.emails[2] != "")
+            cell.innerHTML = cell.innerHTML + "<br>" + contact.emails[2];
+        else if (cell.innerHTML != "" && contact.emails[2] != "")
+            cell.innerHTML = contact.emails[2];            
+            
+        if (cell.innerHTML == "")
+            cell.innerHTML = cell.innerHTML + "&nbsp;";
+        
+        row.appendChild(cell);
+
+        //        cell = document.createElement("td");
+        //        cell.innerHTML = contact.emails[1] + "&nbsp;";
+        //        row.appendChild(cell);
+
+        //        cell = document.createElement("td");
+        //        cell.innerHTML = contact.emails[2] + "&nbsp;";
+        //        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        if (contact.phones[0] != "")
+            cell.innerHTML = contact.phones[0];
+            
+        if (cell.innerHTML != "" && contact.phones[1] != "")
+            cell.innerHTML = cell.innerHTML + "<br>" + contact.phones[1];
+        else if (cell.innerHTML == "" && contact.phones[1] != "")
+            cell.innerHTML = contact.phones[1];
+
+        if (cell.innerHTML != "" && contact.phones[2] != "")
+            cell.innerHTML = cell.innerHTML + "<br>" + contact.phones[2];
+        else if (cell.innerHTML == "" && contact.phones[2] != "")
+            cell.innerHTML = contact.phones[2];
+
+        if (cell.innerHTML != "" && contact.phones[3] != "")
+            cell.innerHTML = cell.innerHTML + "<br>" + contact.phones[3];
+        else if (cell.innerHTML == "" && contact.phones[3] != "")
+            cell.innerHTML = contact.phones[3];
+
+        if (cell.innerHTML != "" && contact.phones[4] != "")
+            cell.innerHTML = cell.innerHTML + "<br>" + contact.phones[4];
+        else if (cell.innerHTML == "" && contact.phones[4] != "")
+            cell.innerHTML = contact.phones[4];
+
+        if (cell.innerHTML == "")
+            cell.innerHTML = cell.innerHTML + "&nbsp;";
+        row.appendChild(cell);
+        //        cell = document.createElement("td");
+        //        cell.innerHTML = contact.phones[1] + "&nbsp;";
+        //        row.appendChild(cell);
+
+        //        cell = document.createElement("td");
+        //        cell.innerHTML = contact.phones[2] + "&nbsp;";
+        //        row.appendChild(cell);
+
+        //        cell = document.createElement("td");
+        //        cell.innerHTML = contact.phones[4] + "&nbsp;";
+        //        row.appendChild(cell)
+
+        //        cell = document.createElement("td");
+        //        cell.innerHTML = contact.phones[3] + "&nbsp;";
+        //        row.appendChild(cell)
+
+        cell = document.createElement("td");
+        cell.innerHTML = contact.imAddress + "&nbsp;";
+        row.appendChild(cell)
+
+        tBody.appendChild(row);
+    }
+    function changeLevel(sender) {        
+        if (trContactFinderInit) {
+            var val = parseInt(sender.options.value);
+            trContactFinder.SubFolderLevel = val;
+        }
+    }
+    function onEnableLog(sender) {        
+        if (trContactFinderInit) {
+            trContactFinder.EnableLog = sender.checked ? 1:0;
+        }
+    }
+
+</script>
+
+</head>
+
+<body onload="formLoad();">
+<p>
+<span style="font-family:Courier New; font-weight:bold">(c)ThomsonReuters Contact Finder Control v1.0.0.30</span>
+</p>
+
+<span style="font-family:MS Sans Serif; font-size:smaller">Enable Log:<input type="checkbox" onclick="onEnableLog(this);" /> </span>
+<br /><br />
+<table width="100%" >
+<caption style="text-align:left">PAB Contacts Search</caption>
+<tr>
+<td width="280px" valign="top">
+<table>
+<tr>
+<td>Sub-Folder Level:</td>
+<td colspan="3">
+<select id="lstSubFolderLevel" onchange="changeLevel(this);">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4" selected="selected">4</option>
+</select>
+
+</td>
+
+</tr>
+<tr>
+<td>Total Folders:</td>
+<td><input type="text" id="txtFolders" readonly="readonly" style="width: 50px"/></td>
+<td><input type="button" value="Count" id="btnPABFolderCount" onclick="getPABFolderCount();"  style="width: 45px" /></td>
+<td><input type="button" value="Abort" id="btnAbortPABFolderCount" onclick="abortPABFolderCounting();" disabled="disabled" style="width: 45px" /></td>
+        
+</tr>
+<tr>
+<td>Total Contacts:</td>
+<td><input type="text" id="txtTotalPABContacts" readonly="readonly" style="width: 50px"/></td>
+<td><input type="button" value="Count" id="btnPABContactCount" onclick="getPABContactCount();"  style="width: 45px" /></td>
+<td><input type="button" value="Abort" id="btnAbortPABContactCount" onclick="abortPABContactCounting();" disabled="disabled" style="width: 45px" /></td>
+</tr>
+</table>
+</td>
+
+<td width="700px">
+<table >
+<caption style="text-align:left;width:200px">Search</caption>
+<tr>
+<td>Search By:</td>
+<td><select id="selSerachBy1">
+<option value="Name">Name</option>
+<option value="Email">Email</option>
+</select>
+</td>
+<td>Start With:</td>
+<td><input type="text" id="txtStartWith1" style="width: 50px"/></td>
+<td>Unique:</td>
+<td><input type="checkbox" id="chkUnique1" /></td>
+<td>Page Size:</td>
+<td><input type="text" id="txtPageSize1" value="50" style="width: 50px"/></td>
+<td>Page #:</td>
+<td><input type="text" id="txtPageNo1" value="1" style="width: 50px"/></td>
+</tr>
+<tr>
+
+<td><input type="button" value="Search" id="btnSearch1" onclick="getPABContacts();" 
+        style="width: 70px" /></td>
+<td><input type="button" value="Abort" id="btnAbort1" disabled="disabled" onclick="abortPABSearch();" style="width: 70px" /></td>
+<td>Found:</td>
+<td><input type="text" id="pabContactsFound" readonly="readonly" style="width: 50px"/></td>
+<td>Search Time:</td>
+<td><input type="text" id="txtTime1" readonly="readonly" style="width: 50px" />sec</td>
+<td>Load Time</td>
+<td colspan="3"><input type="text" id="grdTime1" readonly="readonly" style="width: 50px" />sec</td>
+</tr>
+
+</table>
+</td>
+</tr>
+</table>
+         
+<table id="grdPAB" class="scroll" cellpadding="0" cellspacing="0">
+<thead>
+<tr>
+<th style="width:50px">ID</th>
+<th >Folder</th>
+<th >First Name</th>
+<th >Middle Name</th>
+<th >Last Name</th>
+<th >Full Name</th>
+<th >Company</th>
+<th >Emails</th>
+<th >Phones</th>
+<th >IM Address</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+</table> 
+
+  
+ <br /><br />
+ 
+ <table width="100%" >
+<caption style="text-align:left">NK2 Contacts Search</caption>
+<tr>
+<td width="280px" valign="top">
+<table>
+<tr>
+<td>Total Contacts:</td>
+<td><input type="text" id="txtTotalNK2Contacts" readonly="readonly" style="width: 50px"/></td>
+<td><input type="button" value="Count" id="btnNK2ContactCount" onclick="getNK2ContactCount();" style="width: 45px" /></td>
+<td><input type="button" value="Abort" id="btnAbortNK2ContactCount" onclick="abortNK2ContactCounting();" disabled="disabled" style="width: 45px" /></td>
+</tr>
+</table>
+</td>
+<td width="700px">
+<table >
+<caption style="text-align:left;width:200px">Search</caption>
+<tr>
+<td>Search By:</td>
+<td><select id="selSerachBy2">
+<option value="Name">Name</option>
+<option value="Email">Email</option>
+</select>
+</td>
+<td>Start With:</td>
+<td><input type="text" id="txtStartWith2" style="width: 50px"/></td>
+<td>Unique:</td>
+<td><input type="checkbox" id="chkUnique2" /></td>
+<td>Page Size:</td>
+<td><input type="text" id="txtPageSize2" value="50" style="width: 50px"/></td>
+<td>Page #:</td>
+<td><input type="text" id="txtPageNo2" value="1" style="width: 50px"/></td>
+</tr>
+<tr>
+
+<td><input type="button" id="btnSearch2" value="Search" onclick="getNK2Contacts();" 
+        style="width: 70px" /></td>
+<td><input type="button" id="btnAbort2" value="Abort" disabled="disabled" onclick="abortNK2Search();" style="width: 70px" /></td>
+<td>Found:</td>
+<td><input type="text" id="nk2ContactsFound"  readonly="readonly" style="width: 50px"/></td>
+<td>Search Time:</td>
+<td><input type="text" id="txtTime2" readonly="readonly" style="width: 50px" />sec</td>
+<td>Load Time</td>
+<td colspan="3"><input type="text" id="grdTime2" readonly="readonly" style="width: 50px" />sec</td>
+</tr>
+
+</table>
+</td>
+</tr>
+</table>
+
+<table id="grdNK2" class="scroll" cellpadding="0" cellspacing="0">
+<thead>
+<tr>
+<th style="width:50px">ID</th>
+<th >Folder</th>
+<th >First Name</th>
+<th >Middle Name</th>
+<th >Last Name</th>
+<th >Full Name</th>
+<th >Company</th>
+<th >Emails</th>
+<th >Phones</th>
+<th >IM Address</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+</table> 
+
+    <div id="objDiv">
+    
+    <!--FOR IE -->
+     <object 
+        id="TRContactFinder" 
+        classid="clsid:9A4AF171-92B3-4339-B00F-C8FF4A7CD12E" 
+        codebase="TRContactFinderCab.cab#version=1,0,0,30">                                   
+     </object>       
+     
+    </div>
+    <script type="text/javascript" FOR="TRContactFinder">
+    function TRContactFinder::OnFinishPABContactsSearch(result)
+    {                              
+        endTimePABSearch = new Date().getTime();
+        document.getElementById("txtTime1").value = (endTimePABSearch - startTimePABSearch )/1000;
+        
+        var jsonObj = $.parseJSON(result);	        
+        document.getElementById("pabContactsFound").value = jsonObj.contacts.length;
+        PABContacts = jsonObj.contacts;
+        
+        if(jsonObj != null)
+        {            
+            var contacts = jsonObj.contacts;
+            if (contacts.length > 0)
+            {
+                var msg = "End PAB Contacts Search\r\n\r\nContacts = " + contacts.length + "\r\nTime = " + document.getElementById("txtTime1").value + " seconds.";
+                if(contacts.length > 100)
+                    msg = msg + "\r\n\r\nGird may filled slowly.";
+                alert(msg);
+                endTimePABSearch = new Date().getTime();
+                document.getElementById("btnSearch1").disabled = "";
+                document.getElementById("btnAbort1").disabled = "disabled";
+                //addPABContacts();
+                PABCounter = 0;
+                fhAddPABContacts = setTimeout("addPABContacts()", 1);
+
+            }
+            else
+            {
+                document.getElementById("btnSearch1").disabled = "";
+                document.getElementById("btnAbort1").disabled = "disabled";
+            }
+            
+        }
+    } 
+    function TRContactFinder::OnFinishPABFolderCounting(result)
+    { 
+        document.getElementById("txtFolders").value = result;     
+        document.getElementById("btnPABFolderCount").disabled = "";
+        document.getElementById("btnAbortPABFolderCount").disabled = "disabled";    
+
+    }
+    function TRContactFinder::OnFinishPABContactCounting(result)
+    { 
+        document.getElementById("txtTotalPABContacts").value = result;     
+        document.getElementById("btnPABContactCount").disabled = "";
+        document.getElementById("btnAbortPABContactCount").disabled = "disabled";    
+
+    }
+    function TRContactFinder::OnFinishNK2ContactCounting(result)
+    { 
+        document.getElementById("txtTotalNK2Contacts").value = result;     
+        document.getElementById("btnNK2ContactCount").disabled = "";
+        document.getElementById("btnAbortNK2ContactCount").disabled = "disabled";    
+
+    }
+    function TRContactFinder::OnFinishNK2ContactsSearch(result)
+    {        
+        endTimeNK2Search = new Date().getTime();
+        document.getElementById("txtTime2").value = (endTimeNK2Search - startTimeNK2Search )/1000;
+        
+        var jsonObj = $.parseJSON(result);	        
+        document.getElementById("nk2ContactsFound").value = jsonObj.contacts.length;
+        var table = document.getElementById("grdNK2");
+        var jsonObj = $.parseJSON(result);	
+        var contacts = jsonObj.contacts;
+        NK2Contacts = contacts;
+        
+        if (contacts.length > 0)
+        {
+            var msg = "End NK2 Contacts Search\r\n\r\nContacts = " + contacts.length + "\r\nTime = " + document.getElementById("txtTime2").value + " seconds.";
+            if(contacts.length > 100)
+                msg = msg + "\r\n\r\nGird may filled slowly.";
+            alert(msg);
+            endTimeNK2Search = new Date().getTime();
+            document.getElementById("btnSearch2").disabled = "";
+            document.getElementById("btnAbort2").disabled = "disabled";
+
+   
+            //addContacts(table,contacts);
+            NK2Counter = 0;
+            fhAddNK2Contacts = setTimeout("addNK2Contacts()", 1);
+        }
+        else
+        {
+            document.getElementById("btnSearch2").disabled = "";
+            document.getElementById("btnAbort2").disabled = "disabled";
+        }
+    }
+    function TRContactFinder::OnError(errorCode,error)
+    {
+        document.getElementById("btnSearch1").disabled = "";
+        document.getElementById("btnAbort1").disabled = "disabled";
+
+        document.getElementById("btnSearch2").disabled = "";
+        document.getElementById("btnAbort2").disabled = "disabled";
+        
+        document.getElementById("btnPABFolderCount").disabled = "";
+        document.getElementById("btnAbortPABFolderCount").disabled = "disabled";    
+
+        document.getElementById("btnPABContactCount").disabled = "";
+        document.getElementById("btnAbortPABContactCount").disabled = "disabled";    
+        
+        document.getElementById("btnNk2ContactCount").disabled = "";
+        document.getElementById("btnAbortNK2ContactCount").disabled = "disabled";    
+        
+        alert(error);
+    }
+    </script>
+    
+       
+</body>
+
+</html>

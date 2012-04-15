@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TRContactFinder", "TRContactFinder.vcproj", "{C431E609-BBA6-48EA-9695-BDC577B71D93}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TRContactFinderPS", "TRContactFinderPS.vcproj", "{78342E10-41D9-49BA-B48E-A0EF2248E454}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C431E609-BBA6-48EA-9695-BDC577B71D93} = {C431E609-BBA6-48EA-9695-BDC577B71D93}
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TRContactFinderCab", "..\TRContactFinderCab\TRContactFinderCab.vdproj", "{088A4A97-13C6-4691-ADE2-6A3B5BE71871}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		Unicode Debug|Win32 = Unicode Debug|Win32
+		Unicode Release|Win32 = Unicode Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C431E609-BBA6-48EA-9695-BDC577B71D93}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C431E609-BBA6-48EA-9695-BDC577B71D93}.Debug|Win32.Build.0 = Debug|Win32
+		{C431E609-BBA6-48EA-9695-BDC577B71D93}.Release|Win32.ActiveCfg = Release|Win32
+		{C431E609-BBA6-48EA-9695-BDC577B71D93}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
+		{C431E609-BBA6-48EA-9695-BDC577B71D93}.Unicode Debug|Win32.Build.0 = Unicode Debug|Win32
+		{C431E609-BBA6-48EA-9695-BDC577B71D93}.Unicode Release|Win32.ActiveCfg = Unicode Release|Win32
+		{78342E10-41D9-49BA-B48E-A0EF2248E454}.Debug|Win32.ActiveCfg = Debug|Win32
+		{78342E10-41D9-49BA-B48E-A0EF2248E454}.Release|Win32.ActiveCfg = Release|Win32
+		{78342E10-41D9-49BA-B48E-A0EF2248E454}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
+		{78342E10-41D9-49BA-B48E-A0EF2248E454}.Unicode Release|Win32.ActiveCfg = Unicode Release|Win32
+		{088A4A97-13C6-4691-ADE2-6A3B5BE71871}.Debug|Win32.ActiveCfg = Debug
+		{088A4A97-13C6-4691-ADE2-6A3B5BE71871}.Debug|Win32.Build.0 = Debug
+		{088A4A97-13C6-4691-ADE2-6A3B5BE71871}.Release|Win32.ActiveCfg = Release
+		{088A4A97-13C6-4691-ADE2-6A3B5BE71871}.Unicode Debug|Win32.ActiveCfg = Unicode Debug
+		{088A4A97-13C6-4691-ADE2-6A3B5BE71871}.Unicode Debug|Win32.Build.0 = Unicode Debug
+		{088A4A97-13C6-4691-ADE2-6A3B5BE71871}.Unicode Release|Win32.ActiveCfg = Unicode Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

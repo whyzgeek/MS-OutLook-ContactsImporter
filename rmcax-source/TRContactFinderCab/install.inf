@@ -1,0 +1,25 @@
+; Sample INF file for TRContactFinder.dll
+[Version]
+Signature="$CHICAGO$"
+AdvancedINF=2.0
+
+[Add.Code]
+TRContactFinder.dll=TRContactFinder.dll
+install.inf=install.inf
+
+
+; needed DLL
+[TRContactFinder.dll]
+file-win32-x86=thiscab
+clsid={9A4AF171-92B3-4339-B00F-C8FF4A7CD12E}
+FileVersion=1,0,0,30
+RegisterServer=yes
+
+
+[install.inf]
+file=thiscab
+FileVersion=1,0,0,0
+; end of INF file
+
+
+

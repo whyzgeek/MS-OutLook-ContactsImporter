@@ -1,0 +1,156 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "1 TYPELIB ""TRContactFinder.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,30
+ PRODUCTVERSION 1,0,0,30
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "ThomsonReuters"
+            VALUE "FileDescription", "TRContactFinder"
+            VALUE "FileVersion", "1.0.0.30"
+            VALUE "InternalName", "TRContactFinder.dll"
+            VALUE "LegalCopyright", "(c) ThomsonReuters.  All rights reserved."
+            VALUE "OriginalFilename", "TRContactFinder.dll"
+            VALUE "ProductName", "ThomsonReuters Contact Finder Control"
+            VALUE "ProductVersion", "1.0.0.30"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_TRCONTACTFINDER     REGISTRY                "TRContactFinder.rgs"
+IDR_CONTACTFINDERCTRL   REGISTRY                "ContactFinderCtrl.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_CONTACTFINDERCTRL   BITMAP                  "ContactFinderCtrl.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJNAME            "TRContactFinder"
+    IDS_ERR_OL_NOT_INSTALLED "Outlook is not installed."
+    IDS_ERR_OL_NOT_DEFAULT_CLIENT "Outlook is not set default mail client."
+    IDS_ERR_AX_NOT_INIT     "Access is denied. Cannot initialize TRContactFinder."
+    IDS_ERR_WRONG_OS        "TRContactFinder does not support Windows %s."
+    IDS_ERR_WRONG_IE        "TRContactFinder does not support Internet Explorer %s."
+    IDS_ERR_WRONG_OL        "TRContactFinder does not support Outlook %s"
+    IDS_ERR_CANT_FIND_PRIVATE_FOLDERS 
+                            "TRContactFinder cannot find private folders."
+    IDS_ERR_CANT_OPEN_NK2FILE "TRContactFinder cannot find NK2 File."
+    IDS_ERR_CANT_OPEN_PRIVATE_FOLDERS 
+                            "TRContactFinder cannot open private folders."
+    IDS_ERR_FIREWALL_BLOCK  "TRContactFinder blocked by personal firewall."
+    IDS_ERR_INIT_NOT_INVOKE "TRContactFinder is not initialized. Must invoke InitCtrl() method before any other method."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERR_NOTSUPPORT1     "TRContactFinder does not support GetPABFolderCount method. Please call StartPABFolderCounting method."
+    IDS_ERR_NOTSUPPORT2     "TRContactFinder does not support GetPABContactsCount method. Please call StartPABContactCounting method."
+    IDS_ERR_MAPI_BUSY       "TRContactFinder is in progress. To work with this function please abort runing thread."
+    IDS_ERR_NK2_BUSY        "TRContactFinder NK2 Contact Reading in progress. To work with this function abort runing thread."
+    IDS_ERR_NOTSUPPORT3     "TRContactFinder does not support GetNK2ContactsCount method. Please call StartNK2ContactCounting method."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "TRContactFinder.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

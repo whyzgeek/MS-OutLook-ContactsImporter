@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CContact">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>REiYAQAQqIiDZCQAQAQEAAQIwAAQAAAJQFgQICQCAAQ=</HashCode>
+      <FileName>contact.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CContactFinderCtrl">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>CSMIxAXCAQCDAbAEoAVSIQRQ0FCCAVJFOW4QFZAg4Wk=</HashCode>
+      <FileName>contactfinderctrl.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CExMapi">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CExMapi::__unnamed_00fc_1" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>exmapi.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>RAAACAQRYCgAIYABCAAoEDYYAIQAgQhAEIIXABFAACI=</HashCode>
+      <FileName>exmapi.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CExMapiContact">
+    <Position X="5.25" Y="2.75" Width="2.25" />
+    <NestedTypes>
+      <Enum Name="CExMapiContact::__unnamed_0102_1" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>exmapicontact.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ECAAAEIASAAAYAAQAAAAAAAAAAIAAAAAAAAYEDCBBAE=</HashCode>
+      <FileName>exmapicontact.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CExMapiNamedProperty">
+    <Position X="5.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAQAAAAAAAAABAAAgAAgAAAAAAAAAAA=</HashCode>
+      <FileName>exmapinamedproperty.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CExMapiSink">
+    <Position X="7.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAEABAAAABAAAAAAAAAAgAAAAAAAgBAIAAA=</HashCode>
+      <FileName>exmapisink.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CLogHelper">
+    <Position X="11.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAEIAAAAAAAgAAAAAAAAAAAAABAAACAABAAQA=</HashCode>
+      <FileName>loghelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CNK2Parser">
+    <Position X="7.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIgAAAEQBAIIAAAAAAQcQEAAAAgYAEAAABCAkAEgAA=</HashCode>
+      <FileName>nk2parser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRegistryHelper">
+    <Position X="11.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAIAAAAgAgAAI4IAAAAAAAgAAYAAAEACAAAAAACIAAg=</HashCode>
+      <FileName>registryhelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTextFileIO">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="CTextFileIO::EncodingType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TextFileIO.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>YABBAAAAAKCQAAQAAAAJACAACAAAAAAgAAEAIACAEBE=</HashCode>
+      <FileName>TextFileIO.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

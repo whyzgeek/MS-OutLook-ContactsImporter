@@ -1,0 +1,34 @@
+HKCR
+{
+	TRContactFinder.ContactFinderCtrl.1 = s 'ContactFinderCtrl Class'
+	{
+		CLSID = s '{9A4AF171-92B3-4339-B00F-C8FF4A7CD12E}'
+	}
+	TRContactFinder.ContactFinderCtrl = s 'ContactFinderCtrl Class'
+	{
+		CLSID = s '{9A4AF171-92B3-4339-B00F-C8FF4A7CD12E}'
+		CurVer = s 'TRContactFinder.ContactFinderCtrl.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9A4AF171-92B3-4339-B00F-C8FF4A7CD12E} = s 'ContactFinderCtrl Class'
+		{
+			ProgID = s 'TRContactFinder.ContactFinderCtrl.1'
+			VersionIndependentProgID = s 'TRContactFinder.ContactFinderCtrl'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			ForceRemove 'Control'
+			ForceRemove 'ToolboxBitmap32' = s '%MODULE%, 103'
+			'MiscStatus' = s '0'
+			{
+			    '1' = s '%OLEMISC%'
+			}
+			'TypeLib' = s '{8C1D9D24-38CE-4a3f-806A-CB17EEBAE9A0}'
+			'Version' = s '1.0'
+		}
+	}
+}

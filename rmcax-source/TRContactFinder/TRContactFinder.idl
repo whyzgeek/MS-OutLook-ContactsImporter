@@ -1,0 +1,80 @@
+// TRContactFinder.idl : IDL source for TRContactFinder
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (TRContactFinder.tlb) and marshalling code.
+
+#include "olectl.h"
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(CE2074C6-86AB-4f46-95F8-9B4B2088E373),
+	dual,
+	nonextensible,
+	helpstring("IContactFinderCtrl Interface"),
+	pointer_default(unique)
+]
+interface IContactFinderCtrl : IDispatch{
+	[id(1), helpstring("method InitCtrl")] HRESULT InitCtrl([out,retval] ULONG* pInit);
+	[id(2), helpstring("method GetPABContactsCount")] HRESULT GetPABContactsCount([out,retval] ULONG* pCount);
+	[id(3), helpstring("method GetNK2ContactsCount")] HRESULT GetNK2ContactsCount([out,retval] ULONG* pCount);
+	[id(4), helpstring("method GetPABFolderCount")] HRESULT GetPABFolderCount([out,retval] ULONG* pCount);
+	[id(5), helpstring("method StartPABContactSearch")] HRESULT StartPABContactSearch([in] BSTR bstrSearchBy, [in] BSTR bstrStartWith, [in] ULONG lPageNumber);
+	[id(6), helpstring("method StartNK2ContactSearch")] HRESULT StartNK2ContactSearch([in] BSTR bstrSearchBy, [in] BSTR bstrStartWith, [in] ULONG lPageNumber);
+	[id(7), helpstring("method Abort")] HRESULT Abort(void);
+	[id(8), helpstring("method AbortPABSearch")] HRESULT AbortPABSearch(void);
+	[id(9), helpstring("method AbortNK2Search")] HRESULT AbortNK2Search(void);
+	[id(10), helpstring("method StartPABFolderCounting")] HRESULT StartPABFolderCounting(void);
+	[id(11), helpstring("method StartPABContactCounting")] HRESULT StartPABContactCounting(void);
+	[id(12), helpstring("method AbortPABFolderCounting")] HRESULT AbortPABFolderCounting(void);
+	[id(13), helpstring("method AbortPABContactCounting")] HRESULT AbortPABContactCounting(void);
+
+	[propget, id(20), helpstring("property FetchUnique")] HRESULT FetchUnique([out, retval] USHORT* pVal);
+	[propput, id(20), helpstring("property FetchUnique")] HRESULT FetchUnique([in] USHORT newVal);
+	[propget, id(21), helpstring("property PABPageSize")] HRESULT PABPageSize([out, retval] ULONG* pVal);
+	[propput, id(21), helpstring("property PABPageSize")] HRESULT PABPageSize([in] ULONG newVal);
+	[propget, id(22), helpstring("property NK2PageSize")] HRESULT NK2PageSize([out, retval] ULONG* pVal);
+	[propput, id(22), helpstring("property NK2PageSize")] HRESULT NK2PageSize([in] ULONG newVal);	
+	[id(23), helpstring("method StartNK2ContactCounting")] HRESULT StartNK2ContactCounting(void);
+	[id(24), helpstring("method AbortNK2ContactCounting")] HRESULT AbortNK2ContactCounting(void);
+	[propput, id(25), helpstring("property SubFolderLevel")] HRESULT SubFolderLevel([in] ULONG newVal);
+	[propget, id(26), helpstring("property EnableLog")] HRESULT EnableLog([out, retval] USHORT* pVal);
+	[propput, id(26), helpstring("property EnableLog")] HRESULT EnableLog([in] USHORT newVal);
+};
+
+[
+	uuid(8C1D9D24-38CE-4a3f-806A-CB17EEBAE9A0),
+	version(1.0),
+	helpstring("TRContactFinder 1.0 Type Library")
+]
+library TRContactFinderLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(4367F023-3BD7-4e1c-87D2-327DBFF7DF34),
+		helpstring("_IContactFinderCtrlEvents Interface")
+	]
+	dispinterface _IContactFinderCtrlEvents
+	{
+		properties:
+		methods:
+			[id(1), helpstring("method OnFinishNK2ContactsSearch")] HRESULT OnFinishNK2ContactsSearch(BSTR bstrNK2Contacts);
+			[id(2), helpstring("method OnFinishPABContactsSearch")] HRESULT OnFinishPABContactsSearch(BSTR bstrPABContacts);
+			[id(3), helpstring("method OnError")] HRESULT OnError(SHORT sErrorCode, BSTR bstrError);
+			[id(4), helpstring("method OnFinishPABFolderCounting")] HRESULT OnFinishPABFolderCounting([in] ULONG count);
+			[id(5), helpstring("method OnFinishPABContactCounting")] HRESULT OnFinishPABContactCounting([in] ULONG count);
+			[id(6), helpstring("method OnFinishNK2ContactCounting")] HRESULT OnFinishNK2ContactCounting([in] ULONG count);
+	};
+	[
+		uuid(9A4AF171-92B3-4339-B00F-C8FF4A7CD12E),
+		control,
+		helpstring("ContactFinderCtrl Class")
+	]
+	coclass ContactFinderCtrl
+	{
+		[default] interface IContactFinderCtrl;
+		[default, source] dispinterface _IContactFinderCtrlEvents;
+	};
+};
